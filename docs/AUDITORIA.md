@@ -11,10 +11,10 @@ El servidor llevaba **7 semanas encendido sin interrupciones** en el momento del
 
 | Severidad | Hallazgos |
 |---|---|
-| 🔴 Crítica | 5 |
-| 🟠 Alta | 6 |
-| 🟡 Media | 7 |
-| 🔵 Baja / limpieza | 4 |
+| Crítica | 5 |
+| Alta | 6 |
+| Media | 7 |
+| Baja / limpieza | 4 |
 
 Estado general: **20 de 22 contenedores funcionando**. Los servicios cumplen su función,
 pero la configuración se hizo copiando plantillas y quedaron puertos, permisos y secretos
@@ -22,7 +22,7 @@ más abiertos de lo necesario.
 
 ---
 
-## 🔴 Críticas
+## Críticas
 
 ### C1. Contraseña de Samba en texto plano
 El stack `samba` crea el usuario pasando la contraseña dentro de `command:`. Cualquiera con
@@ -53,7 +53,7 @@ Si un flujo o un webhook de n8n se ve comprometido, el atacante controla el serv
 **Corrección:** quitar el socket, o usar un proxy como `tecnativa/docker-socket-proxy` con
 permisos mínimos.
 
-## 🟠 Altas
+## Altas
 
 ### A1. Portainer desactualizado y publicado en internet
 Versión **2.33.6**, mientras Portainer avisa de la **2.45.3 LTS**, que corrige vulnerabilidades
@@ -89,7 +89,7 @@ sus reglas **antes** que ufw, así que un cortafuegos en el host no los bloquea.
 **Corrección:** publicar en `127.0.0.1` todo lo que se sirve por el túnel y dejar abiertos solo
 los puertos de la LAN (SMB, DNS, Emby) y el de WireGuard.
 
-## 🟡 Medias
+## Medias
 
 | # | Hallazgo | Corrección |
 |---|---|---|
@@ -101,7 +101,7 @@ los puertos de la LAN (SMB, DNS, Emby) y el de WireGuard.
 | M6 | `dperson/samba` está abandonada desde 2020. | Imagen mantenida (`dockurr/samba`) |
 | M7 | Pi-hole v6 ignora `WEBPASSWORD`, así que la contraseña definida probablemente no se aplica. | `FTLCONF_webserver_api_password` |
 
-## 🔵 Bajas / limpieza
+## Bajas / limpieza
 
 - **Imágenes sin uso (~1,7 GB):** `nginx-proxy-manager`, `jc21/mariadb-aria`, `duckdns`,
   `hello-world`, `wg-easy:7` y una imagen huérfana.
@@ -117,11 +117,11 @@ Todo esto se limpia con [`scripts/limpieza-docker.sh`](../scripts/limpieza-docke
 
 | Hallazgo | Cambio en el servidor | Estado |
 |---|---|---|
-| C2 | File Browser pasa de ver `/` a ver solo `/home` | ✅ Aplicado |
-| C3 | Se quitó la publicación del puerto 5432 de PostgreSQL | ✅ Aplicado |
-| C4 | Vaultwarden: `SIGNUPS_ALLOWED=false` e `INVITATIONS_ALLOWED=false` | ✅ Aplicado (falta el hash del `ADMIN_TOKEN`) |
-| C5 | Se quitó `docker.sock` del contenedor de n8n | ✅ Aplicado |
-| C1 | Cambiar la contraseña de Samba | ⏳ Pendiente (la cambia el dueño) |
+| C2 | File Browser pasa de ver `/` a ver solo `/home` | Aplicado |
+| C3 | Se quitó la publicación del puerto 5432 de PostgreSQL | Aplicado |
+| C4 | Vaultwarden: `SIGNUPS_ALLOWED=false` e `INVITATIONS_ALLOWED=false` | Aplicado (falta el hash del `ADMIN_TOKEN`) |
+| C5 | Se quitó `docker.sock` del contenedor de n8n | Aplicado |
+| C1 | Cambiar la contraseña de Samba | Pendiente (la cambia el dueño) |
 
 Los tres stacks se volvieron a desplegar y arrancaron correctamente.
 
