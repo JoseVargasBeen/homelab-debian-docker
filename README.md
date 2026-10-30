@@ -8,7 +8,7 @@ automatizaciones con n8n y la biblioteca de películas.
 Todo va en contenedores de Docker y lo manejo desde Portainer. Hoy son
 14 stacks y 22 contenedores en una máquina de 4 núcleos y 8 GB de RAM.
 
-![Diagrama del servidor](images/diagrama.svg)
+![Arquitectura del servidor](images/arquitectura.svg)
 
 ## Qué corre
 
