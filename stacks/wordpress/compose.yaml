@@ -1,0 +1,46 @@
+services:
+  database:
+    image: mysql:8.4   # 8.0 llegó a fin de soporte en abril de 2026; 8.4 es la LTS
+    restart: unless-stopped
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${WP_DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=${WP_DB_PASSWORD}
+    networks: [wpsite]
+
+  wordpress:
+    image: wordpress:6-apache
+    restart: unless-stopped
+    depends_on: [database]
+    ports:
+      - "127.0.0.1:8000:80"
+    volumes:
+      - wordpress_data:/var/www/html
+    environment:
+      - WORDPRESS_DB_HOST=database:3306
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=${WP_DB_PASSWORD}
+      - WORDPRESS_DB_NAME=wordpress
+    networks: [wpsite]
+
+  # Solo se levanta cuando hace falta:  docker compose --profile admin up -d phpmyadmin
+  # (el 8081 estaba ocupado en el host y el contenedor no arrancaba)
+  phpmyadmin:
+    image: phpmyadmin:5
+    profiles: [admin]
+    depends_on: [database]
+    ports:
+      - "127.0.0.1:8082:80"
+    environment:
+      - PMA_HOST=database
+    networks: [wpsite]
+
+networks:
+  wpsite:
+
+volumes:
+  db_data:
+  wordpress_data:

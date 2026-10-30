@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 340" width="1280" height="340" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="0.55" stop-color="#0f1b33"/>
+      <stop offset="1" stop-color="#1a0f2e"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7cc4ff"/>
+      <stop offset="1" stop-color="#c49bff"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.85" cy="0.2" r="0.5">
+      <stop offset="0" stop-color="#2f81f7" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#2f81f7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.1" cy="1" r="0.5">
+      <stop offset="0" stop-color="#a371f7" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#a371f7" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.04"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="340" rx="20" fill="url(#bg)"/>
+  <rect width="1280" height="340" rx="20" fill="url(#grid)"/>
+  <rect width="1280" height="340" rx="20" fill="url(#glow1)"/>
+  <rect width="1280" height="340" rx="20" fill="url(#glow2)"/>
+
+  <!-- servidor -->
+  <g transform="translate(930,62)">
+    <rect x="0" y="0" width="250" height="62" rx="10" fill="#161f33" stroke="#2f81f7" stroke-opacity="0.6"/>
+    <rect x="0" y="76" width="250" height="62" rx="10" fill="#161f33" stroke="#2f81f7" stroke-opacity="0.6"/>
+    <rect x="0" y="152" width="250" height="62" rx="10" fill="#161f33" stroke="#a371f7" stroke-opacity="0.6"/>
+    <g fill="#3fb950"><circle cx="26" cy="31" r="6"/><circle cx="26" cy="107" r="6"/><circle cx="26" cy="183" r="6"/></g>
+    <g fill="#2f81f7" fill-opacity="0.55">
+      <rect x="50" y="25" width="120" height="12" rx="6"/><rect x="50" y="101" width="90" height="12" rx="6"/><rect x="50" y="177" width="140" height="12" rx="6"/>
+    </g>
+    <g fill="#8b949e" fill-opacity="0.6">
+      <rect x="196" y="22" width="6" height="18" rx="2"/><rect x="208" y="22" width="6" height="18" rx="2"/><rect x="220" y="22" width="6" height="18" rx="2"/>
+      <rect x="196" y="98" width="6" height="18" rx="2"/><rect x="208" y="98" width="6" height="18" rx="2"/><rect x="220" y="98" width="6" height="18" rx="2"/>
+      <rect x="196" y="174" width="6" height="18" rx="2"/><rect x="208" y="174" width="6" height="18" rx="2"/><rect x="220" y="174" width="6" height="18" rx="2"/>
+    </g>
+  </g>
+
+  <text x="64" y="92" fill="#7cc4ff" font-size="18" font-weight="600" letter-spacing="3">PROYECTO · INFRAESTRUCTURA</text>
+  <text x="64" y="160" fill="url(#title)" font-size="62" font-weight="800">Homelab con Debian</text>
+  <text x="64" y="222" fill="#e6edf3" font-size="40" font-weight="700">+ Docker &amp; Portainer</text>
+  <text x="64" y="264" fill="#9fb0c8" font-size="20">Un PC viejo convertido en servidor 24/7: nube, VPN, contraseñas y automatización</text>
+
+  <g font-size="15" font-weight="600">
+    <rect x="64" y="288" width="150" height="32" rx="16" fill="#2f81f7" fill-opacity="0.18" stroke="#2f81f7" stroke-opacity="0.5"/>
+    <text x="139" y="309" fill="#9cc9ff" text-anchor="middle">22 contenedores</text>
+    <rect x="226" y="288" width="110" height="32" rx="16" fill="#a371f7" fill-opacity="0.18" stroke="#a371f7" stroke-opacity="0.5"/>
+    <text x="281" y="309" fill="#d2b8ff" text-anchor="middle">14 stacks</text>
+    <rect x="348" y="288" width="170" height="32" rx="16" fill="#3fb950" fill-opacity="0.18" stroke="#3fb950" stroke-opacity="0.5"/>
+    <text x="433" y="309" fill="#8ee59b" text-anchor="middle">+7 semanas online</text>
+    <rect x="530" y="288" width="160" height="32" rx="16" fill="#d29922" fill-opacity="0.18" stroke="#d29922" stroke-opacity="0.5"/>
+    <text x="610" y="309" fill="#f2cc60" text-anchor="middle">Auditoría incluida</text>
+  </g>
+</svg>

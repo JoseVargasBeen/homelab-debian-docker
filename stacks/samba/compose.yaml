@@ -1,0 +1,17 @@
+# La imagen original (dperson/samba) no se actualiza desde 2020 y la contraseña
+# iba escrita en el "command". Se reemplaza por una imagen mantenida y variables del .env.
+services:
+  samba:
+    image: dockurr/samba:latest
+    container_name: samba
+    restart: unless-stopped
+    environment:
+      - NAME=compartido
+      - USER=${SAMBA_USER}
+      - PASS=${SAMBA_PASSWORD}
+      - UID=1000
+      - GID=1000
+    ports:
+      - "445:445"   # SMB solo en la red local: nunca reenviar este puerto en el router
+    volumes:
+      - /home/lupin/compartido:/storage

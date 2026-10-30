@@ -1,0 +1,12 @@
+# Un único conector para el túnel. Las rutas (subdominio -> servicio local)
+# se configuran en el panel Zero Trust de Cloudflare, no aquí.
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    # http2 evita las reconexiones QUIC que aparecían en los logs cada pocos minutos
+    command: tunnel --no-autoupdate --protocol http2 run
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+    network_mode: host

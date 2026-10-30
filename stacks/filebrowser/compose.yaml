@@ -1,0 +1,12 @@
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:latest   # imagen oficial; la v2.23.0 de 2022 tiene fallos conocidos
+    container_name: filebrowser
+    restart: unless-stopped
+    user: "1000:1000"                       # sin root
+    ports:
+      - "127.0.0.1:1000:80"
+    volumes:
+      - /home/lupin/compartido:/srv         # solo la carpeta compartida, nunca la raíz "/"
+      - ./fb-config/database.db:/database.db
+      - ./fb-config/settings.json:/.filebrowser.json

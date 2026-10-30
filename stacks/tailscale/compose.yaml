@@ -1,0 +1,16 @@
+# Acceso a la red de casa (subnet router) desde cualquier dispositivo con Tailscale.
+services:
+  tailscale:
+    image: tailscale/tailscale:stable
+    container_name: tailscale
+    hostname: lupin
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}   # clave reutilizable con etiqueta; las claves de un solo uso caducan
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--advertise-routes=192.168.1.0/24,10.8.1.0/24 --accept-dns=false
+    volumes:
+      - ./tailscale:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add: [NET_ADMIN, SYS_MODULE]
+    restart: unless-stopped
+    network_mode: host

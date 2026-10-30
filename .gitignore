@@ -1,0 +1,12 @@
+# Secretos y datos del servidor: nunca al repositorio
+.env
+*.env
+!.env.example
+stacks/*/portainer-data/
+stacks/*/wg-easy/
+stacks/*/pihole/
+stacks/*/tailscale/
+stacks/*/fb-config/
+*.db
+*.sqlite
+backups/

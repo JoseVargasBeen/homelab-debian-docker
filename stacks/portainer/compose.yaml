@@ -1,0 +1,11 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:lts   # fijar a la última LTS (2.45.x o superior)
+    container_name: portainer
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:9000:9000"   # solo localhost: se publica a internet por el túnel de Cloudflare
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer-data:/data
+      - /etc/localtime:/etc/localtime:ro

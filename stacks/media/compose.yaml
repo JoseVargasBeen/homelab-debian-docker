@@ -1,0 +1,57 @@
+# Emby + Transmission + Jackett + Heimdall.
+# En el servidor original estaban en 4 stacks separados y con rutas de ejemplo
+# sin cambiar (/path/to/...); aquí se unifican y usan rutas reales.
+x-lsio: &lsio
+  restart: unless-stopped
+  environment: &lsio-env
+    PUID: 1000
+    PGID: 1000
+    TZ: ${TZ}
+
+services:
+  emby:
+    <<: *lsio
+    image: lscr.io/linuxserver/emby:latest
+    container_name: emby
+    volumes:
+      - /opt/homelab/emby:/config
+      - /home/lupin/media/peliculas:/data/movies
+      - /home/lupin/media/series:/data/tvshows
+    ports:
+      - "8096:8096"
+
+  transmission:
+    <<: *lsio
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    environment:
+      <<: *lsio-env
+      USER: ${TRANSMISSION_USER}
+      PASS: ${TRANSMISSION_PASSWORD}
+    volumes:
+      - /opt/homelab/transmission:/config
+      - /home/lupin/Descargas:/downloads
+      - /home/lupin/Descargas/watch:/watch
+    ports:
+      - "127.0.0.1:9091:9091"
+      - "51413:51413"
+      - "51413:51413/udp"
+
+  jackett:
+    <<: *lsio
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    volumes:
+      - /opt/homelab/jackett:/config
+      - /home/lupin/Descargas/watch:/downloads
+    ports:
+      - "127.0.0.1:9117:9117"
+
+  heimdall:
+    <<: *lsio
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: heimdall
+    volumes:
+      - /opt/homelab/heimdall:/config
+    ports:
+      - "127.0.0.1:81:80"
