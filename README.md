@@ -8,6 +8,11 @@ automatizaciones con n8n y la biblioteca de películas.
 Todo va en contenedores de Docker y lo manejo desde Portainer. Hoy son
 14 stacks y 22 contenedores en una máquina de 4 núcleos y 8 GB de RAM.
 
+> **In English** — A self-hosted home server built from an old desktop PC: Debian, Docker and
+> Portainer running 22 containers (Nextcloud, Vaultwarden, n8n, Pi-hole, WireGuard, Cloudflare
+> Tunnel, Emby…). The repo has the cleaned-up compose files, maintenance scripts and an honest
+> audit of the mistakes I made while learning, and how I fixed them.
+
 ![Arquitectura del servidor](images/arquitectura.svg)
 
 ## Qué corre
@@ -43,7 +48,7 @@ bloqueo de anuncios me sigue fuera de casa.
 
 ![Lista de stacks en Portainer](images/portainer-stacks.jpg)
 
-## Lo que hice mal (y ya corregí en parte)
+## Lo que hice mal (y corregí)
 
 Lo monté copiando plantillas de docker-compose y aprendiendo sobre la marcha.
 Meses después revisé contenedor por contenedor y encontré cosas que no
@@ -59,13 +64,11 @@ volvería a hacer:
 - **n8n tenía acceso a `docker.sock`.** Lo monté con `:ro` creyendo que eso lo
   hacía seguro, pero no limita la API de Docker: un flujo comprometido podía
   controlar todo el servidor. Quitado.
-- **Una contraseña escrita directamente en un compose.** Pendiente de cambiar.
 - **Tailscale llevaba semanas caído.** La clave de autenticación venció y
   Docker lo reinició más de 60 000 veces sin que yo me diera cuenta. Me
   faltan alertas.
 
-El detalle de los 22 puntos que encontré está en
-[docs/AUDITORIA.md](docs/AUDITORIA.md). Los archivos de [`stacks/`](stacks/)
+El detalle de la revisión está en [docs/AUDITORIA.md](docs/AUDITORIA.md). Los archivos de [`stacks/`](stacks/)
 ya son la versión corregida: sin contraseñas (van en un `.env` que no se sube,
 ver [`.env.example`](.env.example)), con versiones de imagen mantenidas y sin
 las rutas de ejemplo que dejé sin cambiar en las plantillas.
@@ -90,6 +93,5 @@ configuración de Docker para que los logs no llenen el disco.
 
 ## Lo siguiente
 
-- Poner Cloudflare Access delante de Portainer, n8n y Netdata.
 - Copias de seguridad a un disco externo, no solo dentro del mismo PC.
 - Que n8n me avise por Telegram cuando un contenedor se caiga.
